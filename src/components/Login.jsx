@@ -8,6 +8,7 @@ import { BASE_URL } from '../utils/constants';
 export default function Login() {
     const [emailId , setEmailId] = useState("suraj@gmail.com");
     const [password , setPassword] = useState("Suraj@123");
+    const [error , setError] = useState(false)
     const dispatch = useDispatch()
     const navigate = useNavigate()
    
@@ -24,6 +25,7 @@ export default function Login() {
 
          }catch(err){
             console.log(err.response?.data || err.message)
+            setError(err.response?.data || err.message)
          }
 
           
@@ -42,6 +44,7 @@ export default function Login() {
                     <legend className="fieldset-legend">Password</legend>
                     <input value={password} onChange={ (e)=>setPassword(e.target.value)} type="password" className="input" placeholder="Type here" />
                 </fieldset>
+                {error && <p className='text-red-500'> {error}</p>}
                 <div className="card-actions justify-center">
                     <button onClick={loginHandler} className="btn btn-primary">Login</button>
                 </div>
